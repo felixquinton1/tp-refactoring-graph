@@ -101,7 +101,7 @@ public class DijkstraPathFinder {
 
 		Edge current = this.getNode(target).getReachingEdge();
 		do {
-			result.getListEdge().add(current);
+			result.addEdge(current);
 			current = this.getNode(current.getSource()).getReachingEdge();
 		} while (current != null);
 
