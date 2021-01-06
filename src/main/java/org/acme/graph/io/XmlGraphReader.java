@@ -55,16 +55,15 @@ public class XmlGraphReader {
 			XPath xpath = XPath.newInstance("./edges/edge");
 			for (Object node : xpath.selectNodes(root)) {
 				Element edgeElement = (Element) node;
-				Edge edge = new Edge();
-				edge.setId(edgeElement.getAttribute("id").getValue());
+//              edge.setId(edgeElement.getAttribute("id").getValue());
+                String sourceId = edgeElement.getAttribute("source").getValue();
+//              edge.setSource(graph.findVertex(sourceId));
+                String targetId = edgeElement.getAttribute("target").getValue();
+//              edge.setTarget(graph.findVertex(targetId));
+                Edge edge = new Edge(graph.findVertex(sourceId),graph.findVertex(targetId));
+                edge.setId(edgeElement.getAttribute("id").getValue());
 
-				String sourceId = edgeElement.getAttribute("source").getValue();
-				edge.setSource(graph.findVertex(sourceId));
-
-				String targetId = edgeElement.getAttribute("target").getValue();
-				edge.setTarget(graph.findVertex(targetId));
-
-				graph.getEdges().add(edge);
+                graph.getEdges().add(edge);
 			}
 		}
 
