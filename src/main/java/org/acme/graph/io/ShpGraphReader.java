@@ -54,7 +54,7 @@ public class ShpGraphReader {
 				String id = feature.getID();
 				// String sens = (String)feature.getAttribute("SENS");
 				LineString geometry = toLineString(feature);
-
+				
 				/* Création ou récupération des sommets initiaux et finaux */
 				Vertex source = getOrCreateVertex(graph, geometry.getStartPoint().getCoordinate());
 				Vertex target = getOrCreateVertex(graph, geometry.getEndPoint().getCoordinate());
@@ -62,10 +62,11 @@ public class ShpGraphReader {
 				/* Création de l'arc pour le parcours en sens direct */
 
 				Edge directEdge = graph.createEdge(source, target, id + "-direct");
-
+				directEdge.setGeometry(geometry);
 
 				/* Création de l'arc pour le parcours en sens opposé */
 				Edge reverseEdge = graph.createEdge(source, target, id + "-reverse");
+				directEdge.setGeometry(geometry);
 			}
 		}
 		return graph;
